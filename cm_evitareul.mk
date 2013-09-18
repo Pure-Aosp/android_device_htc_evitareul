@@ -28,20 +28,20 @@ PRODUCT_COPY_FILES += \
 
 # Files needed for boot image
 PRODUCT_COPY_FILES := \
-    $(LOCAL_PATH)/ramdisk/init.enrc2b.rc:root/init.evitareul.rc \
+    $(LOCAL_PATH)/ramdisk/init.evitareul.rc:root/init.evitareul.rc \
     $(LOCAL_PATH)/ramdisk/init.usb.rc:root/init.usb.rc \
     $(LOCAL_PATH)/ramdisk/init.trace.rc:root/init.trace.rc \
     $(LOCAL_PATH)/ramdisk/init.scripts.sh:root/init.scripts.sh \
     $(LOCAL_PATH)/ramdisk/ueventd.rc:root/ueventd.rc \
-    $(LOCAL_PATH)/ramdisk/ueventd.enrc2b.rc:root/ueventd.evitareul.rc \
-    $(LOCAL_PATH)/ramdisk/fstab.enrc2b:root/fstab.evitareul
+    $(LOCAL_PATH)/ramdisk/ueventd.evitareul.rc:root/ueventd.evitareul.rc \
+    $(LOCAL_PATH)/ramdisk/fstab.evitareul:root/fstab.evitareul
 
 
 # Prebuilt Audio/GPS/Camera/Wi-Fi configs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/dsp/AIC3008_REG_DualMic.csv:system/etc/AIC3008_REG_DualMic.csv \
     $(LOCAL_PATH)/prebuilt/dsp/DSP_number.txt:system/etc/DSP_number.txt \
-    $(LOCAL_PATH)/configs/agprs_rm:system/etc/agprs_rm \
+    $(LOCAL_PATH)/configs/agps_rm:system/etc/agps_rm \
     $(LOCAL_PATH)/configs/asound.conf:system/etc/asound.conf \
     $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
@@ -97,26 +97,18 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/soundimage/CodecDSPID_XA.txt:system/etc/soundimage/CodecDSPID_XA.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_BT_CarMode.txt:system/etc/soundimage/Sound_BT_CarMode.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_FM_HP.txt:system/etc/soundimage/Sound_FM_HP.txt \
-    $(LOCAL_PATH)/prebuilt/soundimage/Sound_FM_HP_XA.txt:system/etc/soundimage/Sound_FM_HP_XA.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_FM_SPK.txt:system/etc/soundimage/Sound_FM_SPK.txt \
-    $(LOCAL_PATH)/prebuilt/soundimage/Sound_FM_SPK_XA.txt:system/etc/soundimage/Sound_FM_SPK_XA.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Note_Recording.txt:system/etc/soundimage/Sound_Note_Recording.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Original_DOCK.txt:system/etc/soundimage/Sound_Original_DOCK.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Original_HP.txt:system/etc/soundimage/Sound_Original_HP.txt \
-    $(LOCAL_PATH)/prebuilt/soundimage/Sound_Original_HP_XA.txt:system/etc/soundimage/Sound_Original_HP_XA.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Original_SPK_RING.txt:system/etc/soundimage/Sound_Original_SPK_RING.txt \
-    $(LOCAL_PATH)/prebuilt/soundimage/Sound_Original_SPK_RING_XA.txt:system/etc/soundimage/Sound_Original_SPK_RING_XA.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Original_SPK.txt:system/etc/soundimage/Sound_Original_SPK.txt \
-    $(LOCAL_PATH)/prebuilt/soundimage/Sound_Original_SPK_XA.txt:system/etc/soundimage/Sound_Original_SPK_XA.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Original.txt:system/etc/soundimage/Sound_Original.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Phone_Original_BT.txt:system/etc/soundimage/Sound_Phone_Original_BT.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Phone_Original_DOCK.txt:system/etc/soundimage/Sound_Phone_Original_DOCK.txt \
-    $(LOCAL_PATH)/prebuilt/soundimage/Sound_Phone_Original_HAC.txt:system/etc/soundimage/Sound_Phone_Original_HAC.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Phone_Original_HP.txt:system/etc/soundimage/Sound_Phone_Original_HP.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Phone_Original_REC.txt:system/etc/soundimage/Sound_Phone_Original_REC.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Phone_Original_SPK.txt:system/etc/soundimage/Sound_Phone_Original_SPK.txt \
-    $(LOCAL_PATH)/prebuilt/soundimage/Sound_Phone_Original_SPK_XA.txt:system/etc/soundimage/Sound_Phone_Original_SPK_XA.txt \
-    $(LOCAL_PATH)/prebuilt/soundimage/Sound_Phone_Original_TTY.txt:system/etc/soundimage/Sound_Phone_Original_TTY.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Rec_Landscape.txt:system/etc/soundimage/Sound_Rec_Landscape.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Rec_Portrait.txt:system/etc/soundimage/Sound_Rec_Portrait.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_SpeakerVR_Recording.txt:system/etc/soundimage/Sound_SpeakerVR_Recording.txt \
@@ -128,9 +120,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Voip_Original_REC.txt:system/etc/soundimage/Sound_Voip_Original_REC.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Voip_Original_REC_AEC.txt:system/etc/soundimage/Sound_Voip_Original_REC_AEC.txt \
     $(LOCAL_PATH)/prebuilt/soundimage/Sound_Voip_Original_SPK.txt:system/etc/soundimage/Sound_Voip_Original_SPK.txt \
-    $(LOCAL_PATH)/prebuilt/soundimage/Sound_Voip_Original_SPK_XA.txt:system/etc/soundimage/Sound_Voip_Original_SPK_XA.txt \
-    $(LOCAL_PATH)/prebuilt/soundimage/Sound_Voip_Original_SPK_AEC.txt:system/etc/soundimage/Sound_Voip_Original_SPK_AEC.txt \
-    $(LOCAL_PATH)/prebuilt/soundimage/Sound_Voip_Original_SPK_AEC_XA.txt:system/etc/soundimage/Sound_Voip_Original_SPK_AEC_XA.txt
+    $(LOCAL_PATH)/prebuilt/soundimage/Sound_Voip_Original_SPK_AEC.txt:system/etc/soundimage/Sound_Voip_Original_SPK_AEC.txt
 
 # Audio tfa - actually useless but keep it 
 PRODUCT_COPY_FILES += \
