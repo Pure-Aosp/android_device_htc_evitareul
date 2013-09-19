@@ -44,7 +44,7 @@ BOARD_BLUEDROID_VENDOR_CONF := device/htc/evitareul/bluetooth/vnd_evitareul.txt
 
 # HTC ril compatability
 BOARD_USE_NEW_LIBRIL_HTC := true
-TARGET_PROVIDES_LIBRIL := device/htc/evitareul/proprietary/lib/libril.so
+TARGET_PROVIDES_LIBRIL := vendor/htc/evitareul/proprietary/lib/libril.so
 
 # Audio
 BOARD_USES_GENERIC_AUDIO := false
@@ -71,7 +71,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 
 # Try to build the kernel
 TARGET_KERNEL_SOURCE := kernel/htc/evitareul
-TARGET_KERNEL_CONFIG := cyanogenmod_evitareul_defconfig
+TARGET_KERNEL_CONFIG := evitareul_defconfig
 
 # Don't build docs
 DISABLE_DROIDDOC := true

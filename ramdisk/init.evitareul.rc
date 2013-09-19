@@ -110,8 +110,8 @@ on boot
 
 # Load modules while booting 
     insmod /system/lib/modules/bcmdhd.ko
-    #insmod /lib/modules/baseband-xmm-power2.ko
-    #insmod /lib/modules/baseband_usb_chr.ko
+    insmod /lib/modules/baseband-xmm-power2.ko
+    insmod /lib/modules/baseband_usb_chr.ko
     #insmod /lib/modules/cdc-acm.ko
     #insmod /lib/modules/raw_ip_net.ko
 
@@ -135,7 +135,27 @@ on boot
     # For nvidia platform specific opp tuning support
     chown bluetooth net_bt_stack /sys/devices/platform/tegra_uart_brcm.2/opp_tuning
     chmod 666 /sys/devices/platform/tegra_uart_brcm.2/opp_tuning
-    
+
+# HTC SSD USB
+    chown system system /sys/class/android_usb/f_modem/on
+    chown system system /sys/class/android_usb/f_diag/on
+    chown system system /sys/class/android_usb/f_rmnet/on
+    chown system system /sys/devices/platform/android_usb/usb_disable
+
+# Set diag permissions
+    chown radio radio /dev/diag
+    chown radio radio /dev/diag_mdm
+    chown radio radio /dev/htcdiag
+    chown radio radio /dev/diag_arm9
+    chown radio radio /dev/btdiag
+    chmod 0660 /dev/diag
+    chmod 0660 /dev/diag_mdm
+    chmod 0660 /dev/htcdiag
+    chmod 0660 /dev/diag_arm9
+    chmod 0660 /dev/btdiag
+
+    chown root radio /proc/cmdline
+
 # GPS deamon
     chmod 0774 /sys/class/gpio/gpio223/value
     chown gps system /sys/class/gpio/gpio223/value
@@ -174,18 +194,18 @@ on boot
     chown system system /sys/class/leds/button-backlight/slow_blink
 
 #S2W
-    chown system system /sys/android_touch/sweep2wake
-    chown system system /sys/android_touch/s2w_min_distance
-    chown system system /sys/android_touch/s2w_allow_stroke
-    chown system system /sys/android_touch/s2w_register_threshold
-    chown system system /sys/android_touch/s2w_allow_double_tap
-    chown system system /sys/android_touch/s2w_double_tap_duration
-    chown system system /sys/android_touch/s2w_double_tap_threshold
-    chown system system /sys/android_touch/s2w_double_tap_barrier_y
+    #chown system system /sys/android_touch/sweep2wake
+    #chown system system /sys/android_touch/s2w_min_distance
+    #chown system system /sys/android_touch/s2w_allow_stroke
+    #chown system system /sys/android_touch/s2w_register_threshold
+    #chown system system /sys/android_touch/s2w_allow_double_tap
+    #chown system system /sys/android_touch/s2w_double_tap_duration
+    #chown system system /sys/android_touch/s2w_double_tap_threshold
+    #chown system system /sys/android_touch/s2w_double_tap_barrier_y
 
 # didim
-    chown system system /sys/class/graphics/fb0/device/smartdimmer/enable
-    chown system system /sys/class/graphics/fb0/device/smartdimmer/aggressiveness
+    #chown system system /sys/class/graphics/fb0/device/smartdimmer/enable
+    #chown system system /sys/class/graphics/fb0/device/smartdimmer/aggressiveness
 
 # Sensor
     mkdir /data/sensors 0751 system system
@@ -274,36 +294,11 @@ on boot
     chmod 755 /data/audio
     chown media audio /data/audio
     
-service pollyd /system/bin/pollyd
-    class main
-    user root
-    group root
-    
 # bugreport is triggered by the VOLUME-DOWN and VOLUME-UP keys/
 service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
     disabled
     oneshot
     keycodes 115 114
-
-service nvm-server /system/bin/nvm_server
-    class core
-    socket nvm-ctl stream 660 radio radio
-    user root
-    group root
-    oneshot
-
-service nvm-server /system/bin/nvm_server
-    class core
-    socket nvm-ctl stream 660 radio radio
-    user root
-    group root
-
-service gsm0710mux /system/bin/gsm0710muxd -s /dev/ttyACM0 -v 5 -n 8 -m basic
-    class core
-    user radio
-    group radio cache inet misc
-#    oneshot
-    disabled
 
 service modem-daemon /system/bin/modemd
 
@@ -316,7 +311,24 @@ service ril-daemon /system/bin/rild
     socket rild-agps stream 660 radio system
     socket rild-audio stream 660 radio audio
     user root
-    group radio cache inet misc audio sdcard_r sdcard_rw qcom_oncrpc qcom_diag log
+    group radio cache inet misc audio sdcard_r sdcard_rw log
+
+    #++SSD_RIL
+# QMUX must be in multiple groups to support external process connections
+service qmuxd /system/bin/qmuxd
+    class core
+    user root
+    group radio audio
+
+service netmgrd /system/bin/netmgrd
+    class core
+
+#--SSD_RIL
+
+#Sophia-0410
+service kickstart /system/bin/qcks -1 modem_st1 -2 modem_st2 -3 mdm9k_config -i /firmware/mdm/image/ -u
+    class core
+    oneshot
 
 service init-acmx0 /system/bin/mknod /dev/ttyACMX0 c 66 0
     class core
@@ -484,23 +496,6 @@ on property:init.svc.bootanim=stopped
 # virtual sdcard daemon running as media_rw (1023)
 service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
     class late_start
-
-#++SSD_RIL
-# QMUX must be in multiple groups to support external process connections
-service qmuxd /system/bin/qmuxd
-    class core
-    user root
-    group radio audio
-
-service netmgrd /system/bin/netmgrd
-    class core
-
-#--SSD_RIL
-
-#Sophia-0410
-service kickstart /system/bin/qcks -1 modem_st1 -2 modem_st2 -3 mdm9k_config -i /firmware/mdm/image/ -u
-    class core
-    oneshot
 
 service hdmid /system/bin/hdmid
     socket displayd stream 0660 root system graphics
